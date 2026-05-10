@@ -176,7 +176,6 @@ public class App  extends JFrame implements ActionListener{
         BigDecimal jd = juroDia.setScale(2, RoundingMode.HALF_UP);
 
         tfJurDia.setText(String.valueOf(jd));
-
         return jd;
     }
     private BigDecimal totalGeraldeJuros() {
@@ -188,12 +187,10 @@ public class App  extends JFrame implements ActionListener{
         } catch (NumberFormatException e) {
           atd = BigDecimal.ZERO;
        }
-   
     BigDecimal atraso = atd.setScale(2, RoundingMode.HALF_UP);
     BigDecimal Totaljuros = juroPorDia().multiply(atraso);
     
      tfTotalJuros.setText(Totaljuros.toPlainString()); 
-    // tfTotalJuros.setText(String.valueOf(Totaljuros)); 
     
      return Totaljuros;
 }
@@ -216,15 +213,10 @@ private BigDecimal valortotalBoleto() {
         return valorBoleto;
     }
     //********************************************************************* */
-    public void numeroPorEstenso(){
-       //  try{          
+    public void numeroPorEstenso(){    
             String entry = "";
-      //  do {
-       // JOptionPane.showMessageDialog(null,"Escreva um número inteiro ou um valor em reais: ");
        BigDecimal  vBoleto = valortotalBoleto();
-       
-     //  entry = tf_numeracao.getText().replaceAll("\\.", ""); 
-        entry = String.valueOf(vBoleto);
+          entry = String.valueOf(vBoleto);
             try {           
                if (entry.contains(",") || entry.contains(".")) {                     
                     tfValorEstenso.setText(NumeroExtenso.get(new BigDecimal(
@@ -235,10 +227,8 @@ private BigDecimal valortotalBoleto() {
                     }
                
                 } catch (NumberFormatException e) {
-                    tfValorEstenso.setText("Número inválido.");
-                   // continue;
+                    tfValorEstenso.setText("Número inválido.");            
                 }
-          //  } while (!"".equals(entry));
     }
     public void limparCampos(){
         tfValorOriginal.setText("");
