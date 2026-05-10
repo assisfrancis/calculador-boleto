@@ -115,9 +115,9 @@ public class App  extends JFrame implements ActionListener{
         lbTotalBoleto.setBounds(190, 100, 150, 20);
         lbTotalBoleto.setForeground(Color.DARK_GRAY);
 
-        tfDiaAtraso = new TextField();
-        getContentPane().add(tfDiaAtraso);
-        tfDiaAtraso.setBounds(190, 120, 150, 20);
+        tfTotalBoleto = new TextField();
+        getContentPane().add(tfTotalBoleto);
+        tfTotalBoleto.setBounds(190, 120, 150, 20);
 
          lbMultaFixa = new JLabel("Multa fixa");
         lbMultaFixa.setFont(new Font("Arial", Font.BOLD, 12));
@@ -157,8 +157,7 @@ public class App  extends JFrame implements ActionListener{
             limparCampos();
         }
         if(e.getSource()== btcalcular){
-          //   juroDoDia();
-            juroPorDia();
+             juroPorDia();
             totalGeraldeJuros();
             valortotalBoleto();
             numeroPorEstenso();
@@ -180,16 +179,24 @@ public class App  extends JFrame implements ActionListener{
 
         return jd;
     }
-     private BigDecimal totalGeraldeJuros() {
-
+    private BigDecimal totalGeraldeJuros() {
+   
         String diaemAtraso = tfDiaAtraso.getText().replace(",", ".");
-        BigDecimal atd = new BigDecimal(diaemAtraso);
-        BigDecimal atraso = atd.setScale(2, RoundingMode.HALF_UP);
-        BigDecimal Totaljuros = juroPorDia().multiply(atraso);
+         BigDecimal atd ;  
+    try {
+          atd = new BigDecimal(diaemAtraso);
+        } catch (NumberFormatException e) {
+          atd = BigDecimal.ZERO;
+       }
+   
+    BigDecimal atraso = atd.setScale(2, RoundingMode.HALF_UP);
+    BigDecimal Totaljuros = juroPorDia().multiply(atraso);
     
-        tfTotalJuros.setText(String.valueOf(Totaljuros));
-        return Totaljuros;
-    }
+     tfTotalJuros.setText(Totaljuros.toPlainString()); 
+    // tfTotalJuros.setText(String.valueOf(Totaljuros)); 
+    
+     return Totaljuros;
+}
 private BigDecimal valortotalBoleto() {
 
         String sValor = tfValorOriginal.getText().replace(",", ".");
